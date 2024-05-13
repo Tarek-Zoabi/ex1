@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Presenter Poem</title>
+</head>
+<body>
+    <h1>Upload Text File</h1>
+    <!-- Form for uploading a text file -->
+    <form id="poemForm" enctype="multipart/form-data" onsubmit="processPoem(event)">
+        <!-- Input for uploading a text file -->
+        <input type="file" id="fileInput" name="fileInput" accept=".txt" required>
+        <button type="submit">Upload and Display</button> <!-- Button to upload and display -->
+    </form>
+
+    <!-- Container for displaying the poem -->
+    <div id="poemContainer" style="display: none;">
+        <h2 id="title"></h2> <!-- Title of the poem -->
+        <p id="poemLines"></p> <!-- Lines of the poem -->
+    </div>
+
+    <!-- JavaScript for processing the uploaded poem -->
+    <script>
+        // Function to process the uploaded poem
+        function processPoem(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const fileInput = document.getElementById('fileInput'); // Get the file input element
+            const file = fileInput.files[0]; // Get the uploaded file
+
+            if (!file || !file.name.endsWith('.txt')) {
+                alert('Please upload a valid text file (.txt).'); // Alert for invalid file
+                return;
+            }
+
+            const reader = new FileReader(); // Create a new FileReader object
+            reader.onload = function(e) {
+                const poemText = e.target.result; // Get the text content of the file
+                displayPoem(poemText); // Call function to display the poem
+            };
+            reader.readAsText(file); // Read the uploaded file as text
+        }
+
+        // Function to display the poem
+        function displayPoem(poemText) {
+            const lines = poemText.split('\n'); // Split the poem into lines
+            const title = lines.shift(); // Get the title from the first line
+            const formattedLines = lines.map((line, index) => {
+                if (index === 0) {
+                    return `<h3>${line}</h3>`; // Format first line as heading 3
+                } else if (index === 1) {
+                    return `<h4>${line}</h4>`; // Format second line as heading 4
+                } else {
+                    return line; // Return other lines as regular text
+                }
+            }).join('<br>'); // Join formatted lines with line breaks
+
+            // Display the title and formatted lines in the poem container
+            document.getElementById('title').textContent = title;
+            document.getElementById('poemLines').innerHTML = formattedLines;
+            document.getElementById('poemContainer').style.display = 'block'; // Show the poem container
+        }
+    </script>
+</body>
+</html>

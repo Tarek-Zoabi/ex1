@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Steps Draw</title>
+<style>
+    /* Style for the table */
+    table {
+        border-collapse: collapse; /* Collapse table borders */
+        margin-top: 20px; /* Add space above the table */
+    }
+
+    /* Style for table cells */
+    td {
+        border: 1px solid black; /* Set border for cells */
+        padding: 10px; /* Add padding inside cells */
+        text-align: center; /* Center align text in cells */
+    }
+</style>
+</head>
+<body>
+    <label for="rowCount">Enter a number between 1 and 50:</label>
+    <input type="number" id="rowCount" name="rowCount" min="1" max="50">
+    <button onclick="generateTable()">Generate Table</button>
+
+    <!-- Container for displaying the generated table -->
+    <label id="tableContainer"></label>
+
+    <script>
+        // Function to generate and display the table
+        function generateTable() {
+            const rowCountInput = document.getElementById('rowCount'); // Get the input for row count
+            const rowCount = parseInt(rowCountInput.value); // Convert input value to an integer
+
+            // Validate the input
+            if (isNaN(rowCount) || rowCount < 1 || rowCount > 50) {
+                alert('Please enter a number between 1 and 50.');
+                return; // Exit function if input is invalid
+            }
+
+            let tableHtml = '<table>'; // Initialize the table HTML
+            for (let i = 1; i <= rowCount; i++) {
+                tableHtml += '<tr>'; // Start a new row
+                for (let j = 1; j <= i; j++) {
+                    tableHtml += '<td>' + j + '</td>'; // Add cells with incrementing numbers
+                }
+                tableHtml += '</tr>'; // Close the row
+            }
+            tableHtml += '</table>'; // Close the table
+
+            // Display the generated table in the tableContainer element
+            document.getElementById('tableContainer').innerHTML = tableHtml;
+        }
+    </script>
+</body>
+</html>

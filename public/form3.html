@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album Simple</title>
+    <style>
+        /* Global styles for the page */
+        body {
+            font-family: Arial, sans-serif; /* Set font family for the body */
+            margin: 0; /* Remove default margin */
+            padding: 20px; /* Add padding around the content */
+        }
+
+        /* Style for the main heading */
+        h1 {
+            text-align: center; /* Center align the heading */
+        }
+
+        /* Style for the form container */
+        form {
+            display: flex; /* Use flexbox for form layout */
+            justify-content: center; /* Center align form elements horizontally */
+            margin-bottom: 20px; /* Add space at the bottom of the form */
+        }
+
+        /* Style for the label container */
+        .label-container {
+            display: block; /* Display labels as block elements */
+            text-align: center; /* Center align labels */
+            margin-top: 20px; /* Add space above labels */
+        }
+    </style>
+</head>
+<body>
+    <h1>Album Simple</h1>
+    <!-- Form for uploading images -->
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="imageUpload" accept="image/*" required> <!-- File input for image upload -->
+        <label for="clearCheckbox">Clear</label> <!-- Label for the clear checkbox -->
+        <input type="checkbox" id="clearCheckbox"> <!-- Checkbox for clearing uploaded images -->
+        <button type="submit">Upload</button> <!-- Submit button for uploading images -->
+    </form>
+    <!-- Container for displaying uploaded images -->
+    <div id="imageDisplay"></div>
+
+    <script>
+        let uploadedImages = []; // Array to store uploaded images
+
+        // Event listener for form submission
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            const fileInput = document.getElementById('imageUpload'); // Get the file input element
+            const clearCheckbox = document.getElementById('clearCheckbox'); // Get the clear checkbox element
+            const imageDisplay = document.getElementById('imageDisplay'); // Get the image display container
+
+            // Validate file input and type
+            if (fileInput.files.length > 0 && fileInput.files[0].type.startsWith('image/')) {
+                const reader = new FileReader(); // Create a new FileReader object
+                reader.onload = function(e) {
+                    const image = new Image(); // Create a new Image object
+                    image.src = e.target.result; // Set the image source
+                    uploadedImages.push(image); // Add the uploaded image to the array
+                    updateImageDisplay(); // Update the displayed images
+                };
+                reader.readAsDataURL(fileInput.files[0]); // Read the uploaded file
+
+                // Clear uploaded images if "Clear" is checked
+                if (clearCheckbox.checked) {
+                    uploadedImages = []; // Clear the array
+                    updateImageDisplay(); // Update the displayed images
+                }
+            } else {
+                alert('Please select a valid image file.'); // Alert for invalid file selection
+            }
+        });
+
+        // Function to update the displayed images
+        function updateImageDisplay() {
+            const imageDisplay = document.getElementById('imageDisplay');
+            imageDisplay.innerHTML = ''; // Clear the previous display
+
+            // Iterate through uploaded images and display them
+            uploadedImages.forEach(function(image) {
+                const imgContainer = document.createElement('div'); // Create a div container for each image
+                imgContainer.appendChild(image); // Append the image to the container
+                imageDisplay.appendChild(imgContainer); // Append the container to the display
+            });
+        }
+    </script>
+</body>
+</html>

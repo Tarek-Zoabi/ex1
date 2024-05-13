@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lines Colorful</title>
+<style>
+    /* Style for each line */
+    .line {
+        margin-bottom: 10px; /* Add margin below each line */
+    }
+</style>
+</head>
+<body>
+    <!-- Form for input text -->
+    <form id="linesForm">
+        <label for="textInput">Enter text (up to 80 characters):</label>
+        <input type="text" id="textInput" name="textInput" maxlength="80">
+        <button type="submit">Generate Lines</button>
+    </form>
+
+    <!-- Container for displaying generated lines -->
+    <div id="linesContainer"></div>
+
+    <script>
+        const colorList=[]; // Array to store generated colors
+
+        // Event listener for form submission
+        document.getElementById('linesForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            generateLines(); // Call function to generate lines
+        });
+
+        // Function to generate lines based on input text
+        function generateLines() {
+            const textInput = document.getElementById('textInput').value.trim(); // Get input text
+            if (!textInput) {
+                alert('Please enter text.'); // Display alert if no text is entered
+                return;
+            }
+
+            const linesContainer = document.getElementById('linesContainer');
+            linesContainer.innerHTML = ''; // Clear previous content in container
+
+            // Generate 12 lines with increasing font size and random colors
+            for (let i = 0; i < 12; i++) {
+                const fontSize = 16 + i; // Calculate font size
+                const randomColor = getRandomColor(); // Get random color
+                const lineHtml = `<p class="line" style="font-size: ${fontSize}px; color: ${randomColor};">${textInput}</p>`;
+                linesContainer.insertAdjacentHTML('beforeend', lineHtml); // Add line to container
+            }
+        }
+
+        // Function to generate a random color (RGB format)
+        function getRandomColor() {
+            const r = Math.floor(Math.random() * 256); // Red component (0-255)
+            const g = Math.floor(Math.random() * 256); // Green component (0-255)
+            const b = Math.floor(Math.random() * 256); // Blue component (0-255)
+          
+            // Store color components in an array
+            const colorStr = [r, g, b];
+            colorList.push(colorStr); // Add color to the color list array
+
+            return `rgb(${r},${g},${b})`; // Return RGB color string
+        }
+    </script>
+</body>
+</html>

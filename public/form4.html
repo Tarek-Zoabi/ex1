@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration</title>
+</head>
+<body>
+    <h1>Form Registration</h1>
+    <!-- Form for user registration -->
+    <form id="registrationForm" onsubmit="showDetails(event)">
+        <!-- Input fields for first name, last name, email, gender, date of birth, terms and conditions, and password -->
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required><br><br>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label>Gender:</label><br>
+        <input type="radio" id="genderOther" name="gender" value="Other">
+        <label for="genderOther">Other</label><br>
+        <input type="radio" id="genderFemale" name="gender" value="Female">
+        <label for="genderFemale">Female</label><br>
+        <input type="radio" id="genderMale" name="gender" value="Male" checked>
+        <label for="genderMale">Male</label><br><br>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required><br><br>
+
+        <input type="checkbox" id="terms" name="terms" required>
+        <label for="terms">I agree to the Terms and Conditions</label><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <button type="submit">Submit</button> <!-- Submit button for form submission -->
+    </form>
+
+    <!-- Container for displaying registration details -->
+    <p id="detailsContainer" style="display: none;">
+        <h2>Registration Details:</h2>
+        <p id="fullName"></p> <!-- Display full name -->
+        <p id="emailDisplay"></p> <!-- Display email -->
+        <p id="genderDisplay"></p> <!-- Display gender -->
+        <p id="dobDisplay"></p> <!-- Display date of birth -->
+    </p>
+
+    <!-- JavaScript for handling form submission and displaying details -->
+    <script>
+        function showDetails(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get values from form inputs
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const dob = document.getElementById('dob').value;
+
+            // Display registration details in the details container
+            document.getElementById('fullName').textContent = 'Name: ' + firstName + ' ' + lastName;
+            document.getElementById('emailDisplay').textContent = 'Email: ' + email;
+            document.getElementById('genderDisplay').textContent = 'Gender: ' + gender;
+            document.getElementById('dobDisplay').textContent = 'Date of Birth: ' + dob;
+
+            // Show the details container
+            document.getElementById('detailsContainer').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
