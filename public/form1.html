@@ -5,7 +5,7 @@ bashar helo 324047323 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=dev3ice-width, initial-scale=1.0">
 <title>Steps Draw</title>
 <style>
     /* Style for the table */
@@ -25,7 +25,7 @@ bashar helo 324047323 -->
 <body>
     <label for="rowCount">Enter a number between 1 and 50:</label>
     <input type="number" id="rowCount" name="rowCount" min="1" max="50">
-    <button onclick="generateTable()">Generate Table</button>
+    <button onclick="generateTable()" id="generator">Generate Table</button>
 
     <!-- Container for displaying the generated table -->
     <label id="tableContainer"></label>
@@ -35,7 +35,7 @@ bashar helo 324047323 -->
         function generateTable() {
             const rowCountInput = document.getElementById('rowCount'); // Get the input for row count
             const rowCount = parseInt(rowCountInput.value); // Convert input value to an integer
-
+            
             // Validate the input
             if (isNaN(rowCount) || rowCount < 1 || rowCount > 50) {
                 alert('Please enter a number between 1 and 50.');
@@ -51,9 +51,16 @@ bashar helo 324047323 -->
                 tableHtml += '</tr>'; // Close the row
             }
             tableHtml += '</table>'; // Close the table
-
+            
             // Display the generated table in the tableContainer element
             document.getElementById('tableContainer').innerHTML = tableHtml;
+            
+            let lab=document.getElementsByTagName("label");
+            lab[0].remove();
+            rowCountInput.remove()
+            document.getElementById("generator").remove();
+            
+            
         }
     </script>
 </body>

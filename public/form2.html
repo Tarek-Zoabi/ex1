@@ -1,6 +1,3 @@
-<!-- // Tarek zoabi 208262501
-// mohammad Azaizi 323951988
-// bashar helo 324047323 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +20,7 @@
     </form>
 
     <!-- Container for displaying generated lines -->
-    <div id="linesContainer"></div>
+    <p id="linesContainer"></p>
 
     <script>
         const colorList=[]; // Array to store generated colors
@@ -52,6 +49,7 @@
                 const lineHtml = `<p class="line" style="font-size: ${fontSize}px; color: ${randomColor};">${textInput}</p>`;
                 linesContainer.insertAdjacentHTML('beforeend', lineHtml); // Add line to container
             }
+            document.getElementById("linesForm").remove()
         }
 
         // Function to generate a random color (RGB format)
@@ -63,9 +61,10 @@
             // Store color components in an array
             const colorStr = [r, g, b];
             colorList.push(colorStr); // Add color to the color list array
-
+            
             return `rgb(${r},${g},${b})`; // Return RGB color string
         }
+
     </script>
 </body>
 </html>
