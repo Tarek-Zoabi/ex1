@@ -1,6 +1,3 @@
-<!-- // Tarek zoabi 208262501
-// mohammad Azaizi 323951988
-// bashar helo 324047323 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,13 +40,16 @@
     </form>
 
     <!-- Container for displaying registration details -->
-    <p id="detailsContainer" style="display: none;">
+    <section id="detailsContainer" style="display: none;">
         <h2>Registration Details:</h2>
-        <p id="fullName"></p> <!-- Display full name -->
-        <p id="emailDisplay"></p> <!-- Display email -->
-        <p id="genderDisplay"></p> <!-- Display gender -->
-        <p id="dobDisplay"></p> <!-- Display date of birth -->
-    </p>
+        <article>
+            <h3>User Information</h3>
+            <p id="fullName"></p> <!-- Display full name -->
+            <p id="emailDisplay"></p> <!-- Display email -->
+            <p id="genderDisplay"></p> <!-- Display gender -->
+            <p id="dobDisplay"></p> <!-- Display date of birth -->
+        </article>
+    </section>
 
     <!-- JavaScript for handling form submission and displaying details -->
     <script>
@@ -71,8 +71,8 @@
 
             // Show the details container
             document.getElementById('detailsContainer').style.display = 'block';
-            //remove form
-            document.getElementById("registrationForm").remove()
+            // Remove form
+            document.getElementById("registrationForm").remove();
         }
     </script>
 </body>
